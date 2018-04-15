@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.teqi.bcride17"
+        minSdkVersion 18
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    compile 'com.squareup.retrofit2:retrofit:2.+'
+    compile 'uk.co.chrisjenx:calligraphy:2.+'
+    compile 'com.github.glomadrian:MaterialAnimatedSwitch:1.1@aar'
+    compile 'com.github.d-max:spots-dialog:0.7@aar'
+    implementation 'com.android.support:cardview-v7:26.+'
+    compile 'com.firebase:geofire-android:2.3.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.firebase:firebase-database:12.0.1'
+    compile 'com.google.firebase:firebase-auth:12.0.1'
+    compile 'com.google.firebase:firebase-core:12.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+apply plugin: 'com.google.gms.google-services'
