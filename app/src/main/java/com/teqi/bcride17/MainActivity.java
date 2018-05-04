@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.teqi.bcride17.Common.Common;
 import com.teqi.bcride17.Model.User;
 
 import dmax.dialog.SpotsDialog;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
-        users = db.getReference("Users");
+        users = db.getReference(Common.customer_driver_tbl);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
