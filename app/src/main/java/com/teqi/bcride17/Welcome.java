@@ -87,6 +87,7 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
     private GoogleApiClient mGoogleApiClient;
 
 
+
     private static final int UPDATE_INTERVAL = 5000;
     private static final int FASTEST_INTERVAL = 3000;
     private static final int DISPLACEMENT = 10;
