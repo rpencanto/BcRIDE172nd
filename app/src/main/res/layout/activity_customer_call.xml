@@ -50,4 +50,34 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnAccept"
+            android:text="ACCEPT"
+            android:background="@drawable/btn_sign_in_background"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnDecline"
+            android:text="DECLINE"
+            android:background="@drawable/btn_register_background"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 </RelativeLayout>

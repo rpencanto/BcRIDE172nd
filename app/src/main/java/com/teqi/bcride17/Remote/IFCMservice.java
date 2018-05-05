@@ -1,6 +1,7 @@
 package com.teqi.bcride17.Remote;
 
 import com.teqi.bcride17.Model.FCMResponse;
+import com.teqi.bcride17.Model.Sender;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
