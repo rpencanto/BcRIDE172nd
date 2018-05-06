@@ -83,13 +83,14 @@ public class CustomerCall extends AppCompatActivity {
 
             }
         });
-        //ep12 04:01
+        //ep12 04:01 ep13 07:12
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CustomerCall.this,DriverTracking.class);
                 intent.putExtra("lat",lat);
                 intent.putExtra("lng",lng);
+                intent.putExtra("customerId",customerId);
 
                 startActivity(intent);
                 finish();

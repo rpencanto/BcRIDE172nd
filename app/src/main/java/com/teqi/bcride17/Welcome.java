@@ -1,9 +1,7 @@
 package com.teqi.bcride17;
 
-import android.*;
 import android.Manifest;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -17,11 +15,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
@@ -34,7 +29,6 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
@@ -261,7 +255,7 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
         });
 
         //geo fire
-        drivers = FirebaseDatabase.getInstance().getReference(Common.customer_driver_tbl);
+        drivers = FirebaseDatabase.getInstance().getReference(Common.user_driver_tbl);
         geoFire = new GeoFire(drivers);
 
         setUpLocation();

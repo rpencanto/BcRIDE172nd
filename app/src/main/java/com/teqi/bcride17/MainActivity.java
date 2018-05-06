@@ -18,8 +18,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.teqi.bcride17.Common.Common;
 import com.teqi.bcride17.Model.User;
@@ -57,20 +60,20 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
-        users = db.getReference(Common.customer_driver_tbl);
+        users = db.getReference(Common.user_driver_tbl);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showRegisterDialog();
-                
+
             }
         });
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 shoLoginDialog();
-                
+
             }
         });
     }
@@ -129,6 +132,23 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(AuthResult authResult) {
                                 waitingDialog.dismiss();
+
+                                //ep13 03:50
+                                FirebaseDatabase.getInstance().getReference(Common.user_driver_tbl)
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                Common.currentUser = dataSnapshot.getValue(User.class);
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+
                                 startActivity(new Intent(MainActivity.this,Welcome.class));
                                 finish();
                             }
