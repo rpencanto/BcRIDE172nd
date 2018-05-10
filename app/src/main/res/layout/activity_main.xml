@@ -39,12 +39,12 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/rider_app"
+        android:id="@+id/txt_forgot_password"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Escape the Traffic"
+        android:text="FORGOT PASSWORD?"
         android:textSize="12sp"
         android:textAlignment="center"
         android:textColor="@color/bottomText"
@@ -54,7 +54,7 @@
     <LinearLayout
         android:weightSum="2"
         android:orientation="horizontal"
-        android:layout_above="@+id/rider_app"
+        android:layout_above="@+id/txt_forgot_password"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -10,12 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase db;
     DatabaseReference users;
+
+    TextView txt_forgot_pw;
+
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -62,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         users = db.getReference(Common.user_driver_tbl);
 
+        txt_forgot_pw = (TextView)findViewById(R.id.txt_forgot_password);
+        txt_forgot_pw.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                showDialogForgotPwd();
+                return false;
+            }
+        });
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +90,56 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 shoLoginDialog();
+
+            }
+        });
+    }
+//ep20 06:39
+    private void showDialogForgotPwd() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("FORGOT PASSWORD");
+        alertDialog.setMessage("Please enter your Email Address");
+
+        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+        View forgot_pwd_layout = inflater.inflate(R.layout.forgot_password,null);
+
+        final MaterialEditText edtEmail = (MaterialEditText)forgot_pwd_layout.findViewById(R.id.edtEmail);
+        alertDialog.setView(forgot_pwd_layout);
+
+        alertDialog.setPositiveButton("RESET", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialogInterface, int i) {
+                final AlertDialog waitingDialog = new SpotsDialog(MainActivity.this);//ep20 0546
+                waitingDialog.show();
+
+                auth.sendPasswordResetEmail(edtEmail.getText().toString().trim())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                dialogInterface.dismiss();
+                                waitingDialog.dismiss();
+
+                                Snackbar.make(rootLayout,"Reset password link has been sent",Snackbar.LENGTH_SHORT).show();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialogInterface.dismiss();
+                        waitingDialog.dismiss();
+
+                        Snackbar.make(rootLayout,""+e.getMessage(),Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+            }
+        });
+        alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
 
             }
         });
