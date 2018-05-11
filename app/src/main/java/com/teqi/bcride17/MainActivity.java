@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("RESET", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialogInterface, int i) {
-                final AlertDialog waitingDialog = new SpotsDialog(MainActivity.this);//ep20 0546
+                final android.app.AlertDialog waitingDialog = new SpotsDialog(MainActivity.this);//ep20 0546
                 waitingDialog.show();
 
                 auth.sendPasswordResetEmail(edtEmail.getText().toString().trim())
